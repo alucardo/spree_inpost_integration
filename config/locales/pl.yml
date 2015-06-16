@@ -2,3 +2,5 @@ pl:
   inpost:
     destination: "Miejsce dostarczenia"
     read_more: "Wczytaj więcej paczkomatów"
+    admin:
+      size_title: "Rozmiar paczki dla paczkomatów"
