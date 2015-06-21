@@ -2,23 +2,25 @@
   <h4><%= t('inpost.destination') %></h4>
   <div class="well">
     <select name="order[inpost_machine]" class="form-control select2" id="order_inpost_machine" data-zipcode="<%= @zipcode %>"></select>
-    <a href="#" id="read_more_inpost"><%= t('inpost.read_more') %></a>
+    <div class="get-more-container">
+      <a href="#" id="read_more_inpost"><%= t('inpost.read_more') %></a>
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
   
   inpost_ready = function(){
-    selected_shipping_method = $('input[type=radio]:checked', '#checkout_form_delivery').val();
+    selected_shipping_method = $('input[type=radio]:checked', '#checkout_form_delivery').closest("label").data("name");
 
-    if(selected_shipping_method == 0){
+    if(selected_shipping_method == 'inpost'){
       $("#inpost").show();
     } else {
       $("#inpost").hide();
     }
 
     $('body').on('change', 'input[type=radio]', function(e){
-      if($(this).val() == 0){
+      if($(this).closest("label").data("name") == 'inpost'){
         $("#inpost").show();
       } else {
         $("#inpost").hide();
@@ -46,6 +48,8 @@
 
     $('body').on('click', "#read_more_inpost", function(e){
       e.preventDefault();
+      _this = $(this);
+      $('.get-more-container').html('<i class="fa fa-refresh fa-spin"></i>');
       $('#order_inpost_machine').find('option').remove().end();
       $('#order_inpost_machine').prop('disabled', 'disabled');
       $.get( "http://api.paczkomaty.pl/?do=listmachines_xml", function( data ) {
@@ -63,6 +67,7 @@
           $('#order_inpost_machine').append($("<option></option>").attr("value",name).text(text)); 
         })
         $('#order_inpost_machine').prop('disabled', false);
+        $('.get-more-container').html('');
       });
     })
   }

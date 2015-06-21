@@ -4,3 +4,5 @@ pl:
     read_more: "Wczytaj więcej paczkomatów"
     admin:
       size_title: "Rozmiar paczki dla paczkomatów"
+    calculator:
+      description: "System wysyki dla inpostu"  
