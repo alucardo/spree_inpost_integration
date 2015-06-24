@@ -4,7 +4,7 @@ module Spree
   module Calculator::Shipping
     class InpostRate < ShippingCalculator
       def self.description
-        "tescik"
+        "InPost"
       end
 
       def compute_package(package)

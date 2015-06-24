@@ -17,7 +17,7 @@ Spree::CheckoutController.class_eval do
 
 
   def get_zip_code
-    if params[:state] == "delivery"
+    if params[:state].present? && params[:state] == "delivery"
       @zipcode = @order.bill_address.zipcode     
     end
   end
