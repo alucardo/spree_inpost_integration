@@ -1,4 +1,5 @@
 require_dependency 'spree/calculator'
+# require 'pry'
 
 module Spree
   module Calculator::Shipping
@@ -18,8 +19,12 @@ module Spree
         # else @a_size > 0
         #   @total_price = @a_size * @price_a
         # end
-        # @total_price
-        12,99
+        if package.order.item_total < 500
+          @total_price = 12.99
+        else
+          @total_price = 0
+        end
+        @total_price
       end
 
       private
