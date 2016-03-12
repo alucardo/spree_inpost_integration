@@ -8,17 +8,18 @@ module Spree
       end
 
       def compute_package(package)
-        @order = package.order
-        get_inpost_size
-        get_inpost_price
-        if @c_size > 0
-          @total_price = @c_size * @price_c
-        elsif @b_size > 0
-          @total_price = @b_size * @price_b
-        else @a_size > 0
-          @total_price = @a_size * @price_a
-        end
-        @total_price
+        # @order = package.order
+        # get_inpost_size
+        # get_inpost_price
+        # if @c_size > 0
+        #   @total_price = @c_size * @price_c
+        # elsif @b_size > 0
+        #   @total_price = @b_size * @price_b
+        # else @a_size > 0
+        #   @total_price = @a_size * @price_a
+        # end
+        # @total_price
+        12,99
       end
 
       private
@@ -33,14 +34,14 @@ module Spree
         hash["paczkomaty"]["packtype"].each do |pack_type|
           if pack_type["type"] == "A"
             @price_a = pack_type["price"].to_f
-          end 
+          end
           if pack_type["type"] == "B"
             @price_b = pack_type["price"].to_f
           end
           if pack_type["type"] == "C"
             @price_c = pack_type["price"].to_f
           end
-        end 
+        end
       end
 
       def get_inpost_size
@@ -63,7 +64,7 @@ module Spree
           end
         end
 
-        if @a_size > 1 
+        if @a_size > 1
           @b_size = @b_size + (@a_size / 2 ).to_i
           if @a_size % 2 == 1
             @b_size +=1
@@ -73,10 +74,10 @@ module Spree
           if @b_size > 0 || @c_size > 0
             @b_size +=1
             @a_size = 0
-          end          
+          end
         end
 
-        if @b_size > 1 
+        if @b_size > 1
           @c_size = @c_size + (@b_size / 2 ).to_i
           if @b_size % 2 == 1
             @c_size +=1
