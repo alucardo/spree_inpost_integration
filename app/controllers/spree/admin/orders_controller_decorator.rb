@@ -11,7 +11,17 @@ Spree::Admin::OrdersController.class_eval do
         uri = URI.parse('http://api.paczkomaty.pl/?do=findmachinebyname&name=' + @inpost_machine)
         response = open(uri).read.gsub("\n", "")
         hash = Hash.from_xml(response)
-        @machine_info = hash["paczkomaty"]["machine"]["town"] + " " + hash["paczkomaty"]["machine"]["street"] + " " + hash["paczkomaty"]["machine"]["buildingnumber"] + " " + hash["paczkomaty"]["machine"]["postcode"] + " " + hash["paczkomaty"]["machine"]["town"] + ". " + hash["paczkomaty"]["machine"]["locationdescription"]
+        m = []
+        begin
+          m << hash["paczkomaty"]["machine"]["town"]
+          m << hash["paczkomaty"]["machine"]["street"]
+          m << hash["paczkomaty"]["machine"]["buildingnumber"]
+          m << hash["paczkomaty"]["machine"]["postcode"]
+          m << hash["paczkomaty"]["machine"]["town"]
+          m << hash["paczkomaty"]["machine"]["locationdescription"]
+          @machine_info = m.join(" ")
+        rescue
+        end
       end
     end
   end
