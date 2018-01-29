@@ -8,11 +8,11 @@ Spree::Admin::OrdersController.class_eval do
     if @order
       @inpost_machine = @order.inpost_machine
       if @inpost_machine.present?
+        begin
         uri = URI.parse('http://api.paczkomaty.pl/?do=findmachinebyname&name=' + @inpost_machine)
         response = open(uri).read.gsub("\n", "")
         hash = Hash.from_xml(response)
         m = []
-        begin
           m << hash["paczkomaty"]["machine"]["town"]
           m << hash["paczkomaty"]["machine"]["street"]
           m << hash["paczkomaty"]["machine"]["buildingnumber"]

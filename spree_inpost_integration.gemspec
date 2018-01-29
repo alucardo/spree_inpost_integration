@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_inpost_integration'
-  s.version     = '3.0.2'
+  s.version     = '3.0.3'
   s.summary     = 'Spree integration wint inPost API.'
   s.description = 'Spree integration wint inPost API.'
   s.required_ruby_version = '>= 2.0.0'
